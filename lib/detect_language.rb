@@ -1,6 +1,7 @@
 require "detect_language/version"
 
 require "detect_language/configuration"
+require "detect_language/lookup_context"
 require "detect_language/store"
 
 module DetectLanguage
@@ -8,7 +9,11 @@ module DetectLanguage
     def configuration
       @configuration ||= Configuration.new
     end
-
     alias_method :config, :configuration
+
+    def lookup_context
+      @lookup_context ||= LookupContext.from_wordlist_path(
+        configuration.wordlist_path)
+    end
   end
 end
