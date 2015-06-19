@@ -67,4 +67,22 @@ describe DetectLanguage do
       expect(subject).to eq("en")
     end
   end
+
+  describe ".monkeypatch(klass)" do
+    let(:klass) { Class.new(String) }
+    let(:text) { "der the of" }
+
+    before { described_class.monkeypatch(klass) }
+
+    specify "monkeypatched class responds to :language" do
+      expect(klass.instance_methods).to include(:language)
+    end
+
+    describe "<MonkeypatchedClass>#language(text)" do
+      subject { klass.new(text) }
+      it "returns a language" do
+        expect(subject.language).to eq("en")
+      end
+    end
+  end
 end

@@ -24,5 +24,11 @@ module DetectLanguage
     def language(text)
       detect.language(text)
     end
+
+    def monkeypatch(klass)
+      klass.class_eval do
+        define_method(:language) { DetectLanguage.language(self.to_s) }
+      end
+    end
   end
 end
