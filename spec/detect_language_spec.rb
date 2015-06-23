@@ -2,8 +2,12 @@ require 'spec_helper'
 
 describe DetectLanguage do
   let(:wordlist_path) do
-    File.join(File.dirname(__FILE__), 'detect_language', 'wordlists',
-              'wordlist-10.pstore')
+    File.join(
+      File.dirname(__FILE__),
+      'detect_language',
+      'wordlists',
+      'wordlist-10.pstore'
+    )
   end
 
   before do
@@ -26,11 +30,6 @@ describe DetectLanguage do
 
   describe ".config" do
     subject { described_class.config }
-
-    it { is_expected.to be_kind_of(DetectLanguage::Configuration) }
-    it "memoizes the Configuration" do
-      expect(subject).to eq(described_class.config)
-    end
 
     it "delegates to .configuration" do
       expect(described_class.config).to eq(described_class.configuration)
