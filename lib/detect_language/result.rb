@@ -11,6 +11,22 @@ module DetectLanguage
       @total_value = 0.0
     end
 
+    # TODO: spec
+    def winner!(second_score)
+      @second_score = second_score
+    end
+
+    # TODO: spec
+    def winner?
+      !@second_score.nil?
+    end
+
+    # TODO: spec
+    def confidence
+      factor = 1 - (@second_score / score)
+      factor * hit_ratio
+    end
+
     def add(value)
       return @value unless value > 0
 
@@ -23,10 +39,14 @@ module DetectLanguage
     end
 
     def hit_ratio
+      return 0.0 if @words_count == 0 # TODO: spec
+
       @hit_count.to_f / @words_count
     end
 
     def percentage
+      return 0.0 if @total_value == 0 # TODO: spec
+
       @value / @total_value
     end
 

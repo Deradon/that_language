@@ -9,13 +9,13 @@ module DetectLanguage
     end
 
     def winner
-      results.max
+      results.max.tap { |r| r.winner!(results[1].score) }
     end
 
     def results
       finalize_results
 
-      _results
+      _results.sort
     end
 
   private

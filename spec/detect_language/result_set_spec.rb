@@ -47,6 +47,10 @@ describe DetectLanguage::ResultSet do
       third_result.add(0.2)
     end
 
+    its(:confidence) { is_expected.to be > 0.1 }
+    its(:confidence) { is_expected.to be < 0.2 }
+    its(:winner?) { is_expected.to eq(true) }
+
     it "returns result with highest value" do
       expect(subject).to eq(second_result)
     end

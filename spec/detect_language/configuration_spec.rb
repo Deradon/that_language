@@ -12,7 +12,7 @@ describe DetectLanguage::Configuration do
     describe "#wordlist_path" do
       subject { configuration.wordlist_path }
       let(:wordlist_path) do
-        File.absolute_path(File.join(__FILE__, '../../../wordlists/wordlist-10k.pstore'))
+        File.absolute_path(File.join(__FILE__, '../../../wordlists/wordlist-100k.pstore'))
       end
 
       it { is_expected.to eq(wordlist_path) }
