@@ -9,29 +9,21 @@ module DetectLanguage
       @lookup_context = lookup_context
     end
 
-    # TODO: Move into a strategy
     def details(text)
       words = words_for(text)
 
-      result = Hash.new
-      lookup_context.locales.each do |locale|
-        result[locale] = 0.0
-      end
+      result_set = ResultSet.new(words.length)
 
-      matched = 0
       words.each do |word|
         word_result = lookup_context[word]
-        word_result.each do |locale, value|
-          result[locale] += value
-        end
-        matched += 1 if word_result.values.any? { |v| v > 0.0 }
+        word_result.each { |locale, value| result_set.for(locale).add(value) }
       end
 
-      result
+      result_set
     end
 
     def language(text)
-      details(text).max { |a,b| a[1] <=> b[1] }.first
+      details(text).winner
     end
 
   private

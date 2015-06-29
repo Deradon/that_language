@@ -108,4 +108,32 @@ describe DetectLanguage::Result do
       pending
     end
   end
+
+  describe "<=>" do
+    let(:first_result) { described_class.new(locale: :de) }
+    let(:second_result) { described_class.new(locale: :en) }
+    let(:third_result) { described_class.new(locale: :fr) }
+
+    before do
+      first_result.add(0.2)
+      second_result.add(0.4)
+      third_result.add(0.1)
+
+      [first_result, second_result, third_result].each do |result|
+        result.total_value = 0.7
+        result.words_count = 10
+      end
+    end
+
+    specify { expect(first_result).to be > third_result }
+    specify { expect(first_result).to be < second_result }
+    specify { expect(second_result).to be > third_result }
+
+    specify { expect(first_result <=> second_result).to eq(-1) }
+    specify { expect(first_result <=> third_result).to eq(1) }
+    specify { expect(second_result <=> first_result).to eq(1) }
+    specify { expect(second_result <=> third_result).to eq(1) }
+    specify { expect(third_result <=> first_result).to eq(-1) }
+    specify { expect(third_result <=> second_result).to eq(-1) }
+  end
 end

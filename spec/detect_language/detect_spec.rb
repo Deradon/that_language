@@ -31,17 +31,28 @@ describe DetectLanguage::Detect do
     let(:text) { "der the of" }
     subject { detect.details(text) }
 
-    it "returns a detailed hash" do
-      expect(subject).to eq({"de" => 0.04, "en" => 0.07})
-    end
+    it { is_expected.to be_kind_of(DetectLanguage::ResultSet) }
   end
 
   describe "#language(text)" do
     let(:text) { "der the of" }
     subject { detect.language(text) }
 
-    it "returns a language" do
-      expect(subject).to eq("en")
+    it { is_expected.to be_kind_of(DetectLanguage::Result) }
+
+    describe "return value" do
+      its(:locale) { is_expected.to eq("en") }
+
+      its(:score) { is_expected.to be > 0.4 }
+      its(:score) { is_expected.not_to be > 0.5 }
+
+      its(:percentage) { is_expected.to be > 0.6 }
+      its(:percentage) { is_expected.not_to be > 0.7 }
+
+      its(:hit_ratio) { is_expected.to be > 0.6 }
+      its(:hit_ratio) { is_expected.not_to be > 0.7 }
+
+      its(:hit_count) { is_expected.to eq(2) }
     end
   end
 end

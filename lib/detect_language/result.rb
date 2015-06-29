@@ -29,5 +29,17 @@ module DetectLanguage
     def percentage
       @value / @total_value
     end
+
+    def <=>(other)
+      score <=> other.score
+    end
+
+    def <(other)
+      score < other.score
+    end
+
+    def >(other)
+      score > other.score
+    end
   end
 end

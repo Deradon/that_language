@@ -8,33 +8,35 @@ module DetectLanguage
       lookup[key]
     end
 
-    # FIXME: Refactor ...
     def winner
-      winner = nil
-      max_value = -1
-      results.each do |r|
-        if r.value > max_value
-          max_value = r.value
-          winner = r
-        end
-      end
-      winner.words_count = @words_count
-      winner.total_value = total_value
-      winner
+      results.max
     end
 
     def results
-      lookup.values
+      finalize_results
+
+      _results
     end
 
   private
 
+    def _results
+      lookup.values
+    end
+
+    def finalize_results
+      _results.each do |result|
+        result.words_count = @words_count
+        result.total_value = total_value
+      end
+    end
+
     def total_value
-      results.inject(0) { |sum, result| sum += result.value }
+      _results.inject(0) { |sum, result| sum += result.value }
     end
 
     def lookup
-     @lookup ||= Hash.new { |h, l| h[l] = Result.new(locale: l) }
+      @lookup ||= Hash.new { |h, l| h[l] = Result.new(locale: l) }
     end
   end
 end

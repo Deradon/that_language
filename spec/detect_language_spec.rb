@@ -62,8 +62,9 @@ describe DetectLanguage do
     subject { described_class.language(text) }
     let(:text) { "der the of" }
 
-    it "returns a language" do
-      expect(subject).to eq("en")
+    it { is_expected.to be_kind_of(DetectLanguage::Result) }
+    it "returns a Result with a locale" do
+      expect(subject.locale).to eq("en")
     end
   end
 
@@ -79,8 +80,8 @@ describe DetectLanguage do
 
     describe "<MonkeypatchedClass>#language(text)" do
       subject { klass.new(text) }
-      it "returns a language" do
-        expect(subject.language).to eq("en")
+      it "returns a Result with a locale" do
+        expect(subject.language.locale).to eq("en")
       end
     end
   end
