@@ -15,7 +15,7 @@ module DetectLanguage
     def results
       finalize_results
 
-      _results.sort
+      _results.sort.reverse
     end
 
   private
