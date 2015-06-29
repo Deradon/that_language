@@ -20,9 +20,20 @@ Or install it yourself as:
 
     $ gem install detect_language
 
-## Usage
+## Supported locales
 
-TODO: Write usage instructions here
+* ar
+* da
+* de
+* en
+* es
+* fa
+* fr
+* it
+* nl
+* pt
+* ru
+* sv
 
 ## Development
 
