@@ -3,6 +3,8 @@ require "detect_language/version"
 require "detect_language/configuration"
 require "detect_language/detect"
 require "detect_language/lookup_context"
+require "detect_language/result"
+require "detect_language/result_set"
 require "detect_language/store"
 
 module DetectLanguage
