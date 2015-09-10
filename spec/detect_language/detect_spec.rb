@@ -52,4 +52,8 @@ describe DetectLanguage::Detect do
 
     its(:hit_count) { is_expected.to eq(2) }
   end
+
+  describe "#to_h" do
+    pending
+  end
 end

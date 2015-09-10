@@ -1,5 +1,7 @@
 module DetectLanguage
   class ResultSet
+    include Enumerable
+
     def initialize(words_count)
       @words_count = words_count
     end
@@ -16,6 +18,20 @@ module DetectLanguage
       finalize_results
 
       _results.sort.reverse
+    end
+
+    def each(&block)
+      results.each(&block)
+    end
+
+    def to_h
+      {
+        results: results.map(&:to_h)
+      }
+    end
+
+    def to_json
+      to_h.to_json
     end
 
   private

@@ -54,4 +54,21 @@ describe DetectLanguage::ResultSet do
       expect(subject).to eq(second_result)
     end
   end
+
+  describe "#to_h" do
+    subject { result_set.to_h }
+
+    it { is_expected.to be_a(Hash) }
+    it { is_expected.to include(:results) }
+  end
+
+  describe "#to_json" do
+    subject { result_set.to_json }
+    it { is_expected.to be_a(String) }
+  end
+
+  describe ".included_modules" do
+    subject { described_class.included_modules }
+    it { is_expected.to include(Enumerable) }
+  end
 end

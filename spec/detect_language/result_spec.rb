@@ -128,4 +128,23 @@ describe DetectLanguage::Result do
     specify { expect(third_result <=> first_result).to eq(-1) }
     specify { expect(third_result <=> second_result).to eq(-1) }
   end
+
+  describe "#to_h" do
+    subject { result.to_h }
+
+    it { is_expected.to be_a(Hash) }
+    it { is_expected.to include(locale: locale) }
+    it { is_expected.to include(value: 0) }
+    it { is_expected.to include(score: 0) }
+    it { is_expected.to include(percentage: 0) }
+    it { is_expected.to include(hit_ratio: 0) }
+    it { is_expected.to include(hit_count: 0) }
+    it { is_expected.to include(words_count: 0) }
+  end
+
+  # TODO: Spec properly
+  describe "#to_json" do
+    subject { result.to_json }
+    it { is_expected.to be_a(String) }
+  end
 end

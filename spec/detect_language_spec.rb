@@ -58,6 +58,13 @@ describe DetectLanguage do
     end
   end
 
+  describe ".details(text)" do
+    subject { described_class.details(text) }
+    let(:text) { "der the of" }
+
+    it { is_expected.to be_kind_of(DetectLanguage::ResultSet) }
+  end
+
   describe ".language(text)" do
     subject { described_class.language(text) }
     let(:text) { "der the of" }

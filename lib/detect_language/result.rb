@@ -1,3 +1,5 @@
+require 'json'
+
 module DetectLanguage
   class Result
     attr_reader :locale, :value, :hit_count
@@ -60,6 +62,22 @@ module DetectLanguage
 
     def >(other)
       score > other.score
+    end
+
+    def to_h
+      {
+        locale: locale,
+        value: value,
+        score: score,
+        percentage: percentage,
+        hit_ratio: hit_ratio,
+        hit_count: hit_count,
+        words_count: words_count
+      }
+    end
+
+    def to_json
+      to_h.to_json
     end
   end
 end
