@@ -29,7 +29,7 @@ module DetectLanguage
   private
 
     def words_for(text)
-      words = text
+      text
         .scan(WORD_REGEX)
         .flatten
         .reject { |w| w =~ START_WITH_DIGIT_REGEX }
