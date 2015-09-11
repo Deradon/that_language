@@ -9,7 +9,7 @@ module DetectLanguage
     end
 
     def winner
-      results.max.tap { |r| r.winner!(results[1].score) }
+      results.max.tap { |r| r.winner!(second_score: results[1].score) }
     end
 
     def results
