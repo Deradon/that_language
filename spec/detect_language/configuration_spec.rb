@@ -1,8 +1,7 @@
 require 'spec_helper'
 
 describe DetectLanguage::Configuration do
-  let(:configuration) { described_class.new }
-  subject { configuration }
+  subject(:configuration) { described_class.new }
 
   describe "#initialize" do
     it { is_expected.to be_kind_of(described_class) }

@@ -1,8 +1,7 @@
 require 'spec_helper'
 
 describe DetectLanguage::ResultSet do
-  subject { result_set }
-  let(:result_set) { described_class.new(2) }
+  subject(:result_set) { described_class.new(2) }
 
   describe "#initialize(words_count)" do
     pending

@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 describe DetectLanguage::Result do
-  subject { result }
-  let(:result) { described_class.new(locale: locale) }
+  subject(:result) { described_class.new(locale: locale) }
+
   let(:locale) { :de }
 
   describe ".initialize" do

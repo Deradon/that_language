@@ -1,10 +1,9 @@
 require 'spec_helper'
 
 describe DetectLanguage::Store do
-  let(:store) { described_class.new(path) }
-  let(:path) { File.join('wordlists', 'wordlist-10k.pstore') }
+  subject(:store) { described_class.new(path) }
 
-  subject { store }
+  let(:path) { File.join('wordlists', 'wordlist-10k.pstore') }
 
   describe "#initialize(path)" do
     context "when no path given" do
