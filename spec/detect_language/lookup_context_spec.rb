@@ -30,12 +30,23 @@ describe DetectLanguage::LookupContext do
   describe ".from_wordlist_path(wordlist_path)" do
     subject { described_class.from_wordlist_path(wordlist_path) }
 
-    let(:wordlist_path) do
-      File.join(File.dirname(__FILE__), 'wordlists', 'wordlist-10.pstore')
+    context "when given path is a existing file" do
+      let(:wordlist_path) do
+        File.join(File.dirname(__FILE__), 'wordlists', 'wordlist-10.pstore')
+      end
+
+      it { is_expected.to be_kind_of(DetectLanguage::LookupContext) }
+      its(:locales) { is_expected.to eq(%w(it en fr de nl)) }
     end
 
-    it { is_expected.to be_kind_of(DetectLanguage::LookupContext) }
-    its(:locales) { is_expected.to eq(%w(it en fr de nl)) }
+    context "when given path is a existing directory" do
+      let(:wordlist_path) do
+        File.join(File.dirname(__FILE__), 'wordlists', '10')
+      end
+
+      it { is_expected.to be_kind_of(DetectLanguage::LookupContext) }
+      its(:locales) { is_expected.to eq(%w(it en fr de nl)) }
+    end
   end
 
   describe "[](word)" do
@@ -50,5 +61,21 @@ describe DetectLanguage::LookupContext do
       let(:word) { 'of' }
       it { is_expected.to eq({"de" => 0.0, "en" => 0.02}) }
     end
+  end
+
+  describe "#merge(other_lookup_context)" do
+    subject { lookup_context.merge(other_lookup_context) }
+    let(:other_lookup_context) { described_class.new(other_lookup_hash) }
+    let(:other_lookup_hash) do
+      Hash.new.tap do |hash|
+        hash[:locales] = %w(it)
+        hash["it"] = { "foo" => 0.05, "bar" => 0.02 }
+      end
+    end
+
+    its(:locales) { is_expected.to eq(%w(de en it)) }
+    specify { expect(subject["der"]).to eq({"de" => 0.04, "en" => 0.0, "it" => 0.0}) }
+    specify { expect(subject["of"]).to eq({"de" => 0.0, "en" => 0.02, "it" => 0.0}) }
+    specify { expect(subject["foo"]).to eq({"de" => 0.0, "en" => 0.0, "it" => 0.05}) }
   end
 end

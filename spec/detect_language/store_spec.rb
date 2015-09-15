@@ -28,9 +28,7 @@ describe DetectLanguage::Store do
   describe "#to_h" do
     subject { store.to_h }
 
-    it "returns a Hash" do
-      expect(subject).to be_kind_of(Hash)
-    end
+    it { is_expected.to be_kind_of(Hash) }
 
     it "contains :locales" do
       expect(subject[:locales]).not_to be_nil
@@ -42,20 +40,16 @@ describe DetectLanguage::Store do
   end
 
   describe "exists?" do
+    subject { store.exists? }
+
     context "when pstore exists" do
       let(:path) { File.join('wordlists', 'wordlist-10k.pstore') }
-
-      it "returns true" do
-        expect(subject.exists?).to eq(true)
-      end
+      it { is_expected.to be(true) }
     end
 
     context "when pstore does not exists" do
       let(:path) { 'path/to/nothing.pstore' }
-
-      it "returns false" do
-        expect(subject.exists?).to eq(false)
-      end
+      it { is_expected.to be(false) }
     end
   end
 end
