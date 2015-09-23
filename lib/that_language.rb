@@ -32,6 +32,8 @@ module ThatLanguage
       end
     end
 
+  private
+
     def detect
       @detect ||= Detect.new(lookup_context)
     end

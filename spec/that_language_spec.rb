@@ -80,26 +80,4 @@ describe ThatLanguage do
       end
     end
   end
-
-  describe ".detect" do
-    subject { described_class.detect }
-
-    it { is_expected.to be_kind_of(ThatLanguage::Detect) }
-    it "memoizes the Detect" do
-      expect(subject).to eq(described_class.detect)
-    end
-  end
-
-  describe ".lookup_context" do
-    subject { described_class.lookup_context }
-
-    it { is_expected.to be_kind_of(ThatLanguage::LookupContext) }
-    it "memoizes the LookupContext" do
-      expect(subject).to eq(described_class.lookup_context)
-    end
-
-    it "create a LookupContext with with locales set" do
-      expect(subject.locales).to eq(%w(it en fr de nl))
-    end
-  end
 end
