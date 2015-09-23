@@ -1,4 +1,4 @@
-module DetectLanguage
+module ThatLanguage
   class ResultSet
     include Enumerable
 

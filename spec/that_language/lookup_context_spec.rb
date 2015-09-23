@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe DetectLanguage::LookupContext do
+describe ThatLanguage::LookupContext do
   subject(:lookup_context) { described_class.new(lookup_hash) }
 
   let(:lookup_hash) do
@@ -35,7 +35,7 @@ describe DetectLanguage::LookupContext do
         File.join(File.dirname(__FILE__), 'wordlists', 'wordlist-10.pstore')
       end
 
-      it { is_expected.to be_kind_of(DetectLanguage::LookupContext) }
+      it { is_expected.to be_kind_of(ThatLanguage::LookupContext) }
       its(:locales) { is_expected.to eq(%w(it en fr de nl)) }
     end
 
@@ -44,7 +44,7 @@ describe DetectLanguage::LookupContext do
         File.join(File.dirname(__FILE__), 'wordlists', '10')
       end
 
-      it { is_expected.to be_kind_of(DetectLanguage::LookupContext) }
+      it { is_expected.to be_kind_of(ThatLanguage::LookupContext) }
       its(:locales) { is_expected.to eq(%w(it en fr de nl)) }
     end
   end

@@ -1,4 +1,4 @@
-module DetectLanguage
+module ThatLanguage
   class Detect
     WORD_REGEX = /(\p{Word}+)/
     START_WITH_DIGIT_REGEX = /^\d.*/

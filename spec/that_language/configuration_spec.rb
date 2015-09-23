@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe DetectLanguage::Configuration do
+describe ThatLanguage::Configuration do
   subject(:configuration) { described_class.new }
 
   describe "#initialize" do

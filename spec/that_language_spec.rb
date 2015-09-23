@@ -1,28 +1,28 @@
 require 'spec_helper'
 
-describe DetectLanguage do
+describe ThatLanguage do
   let(:wordlist_path) do
     File.join(
       File.dirname(__FILE__),
-      'detect_language',
+      'that_language',
       'wordlists',
       'wordlist-10.pstore'
     )
   end
 
   before do
-    allow(DetectLanguage.configuration).to receive(:wordlist_path)
+    allow(ThatLanguage.configuration).to receive(:wordlist_path)
       .and_return(wordlist_path)
   end
 
   it 'has a version number' do
-    expect(DetectLanguage::VERSION).not_to be nil
+    expect(ThatLanguage::VERSION).not_to be nil
   end
 
   describe ".configuration" do
     subject { described_class.configuration }
 
-    it { is_expected.to be_kind_of(DetectLanguage::Configuration) }
+    it { is_expected.to be_kind_of(ThatLanguage::Configuration) }
     it "memoizes the Configuration" do
       expect(subject).to eq(described_class.configuration)
     end
@@ -39,7 +39,7 @@ describe DetectLanguage do
   describe ".lookup_context" do
     subject { described_class.lookup_context }
 
-    it { is_expected.to be_kind_of(DetectLanguage::LookupContext) }
+    it { is_expected.to be_kind_of(ThatLanguage::LookupContext) }
     it "memoizes the LookupContext" do
       expect(subject).to eq(described_class.lookup_context)
     end
@@ -52,7 +52,7 @@ describe DetectLanguage do
   describe ".detect" do
     subject { described_class.detect }
 
-    it { is_expected.to be_kind_of(DetectLanguage::Detect) }
+    it { is_expected.to be_kind_of(ThatLanguage::Detect) }
     it "memoizes the Detect" do
       expect(subject).to eq(described_class.detect)
     end
@@ -62,14 +62,14 @@ describe DetectLanguage do
     subject { described_class.details(text) }
     let(:text) { "der the of" }
 
-    it { is_expected.to be_kind_of(DetectLanguage::ResultSet) }
+    it { is_expected.to be_kind_of(ThatLanguage::ResultSet) }
   end
 
   describe ".language(text)" do
     subject { described_class.language(text) }
     let(:text) { "der the of" }
 
-    it { is_expected.to be_kind_of(DetectLanguage::Result) }
+    it { is_expected.to be_kind_of(ThatLanguage::Result) }
     it "returns a Result with a locale" do
       expect(subject.locale).to eq("en")
     end

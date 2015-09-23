@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-describe DetectLanguage::Detect do
+describe ThatLanguage::Detect do
   subject(:detect) { described_class.new(lookup_context) }
 
-  let(:lookup_context) { DetectLanguage::LookupContext.new(lookup_hash) }
+  let(:lookup_context) { ThatLanguage::LookupContext.new(lookup_hash) }
   let(:lookup_hash) do
     Hash.new.tap do |hash|
       hash[:locales] = %w(de en)
@@ -30,14 +30,14 @@ describe DetectLanguage::Detect do
     subject { detect.details(text) }
     let(:text) { "der the of" }
 
-    it { is_expected.to be_kind_of(DetectLanguage::ResultSet) }
+    it { is_expected.to be_kind_of(ThatLanguage::ResultSet) }
   end
 
   describe "#language(text)" do
     subject { detect.language(text) }
     let(:text) { "der the of" }
 
-    it { is_expected.to be_kind_of(DetectLanguage::Result) }
+    it { is_expected.to be_kind_of(ThatLanguage::Result) }
 
     its(:locale) { is_expected.to eq("en") }
 

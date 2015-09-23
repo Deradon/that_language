@@ -1,6 +1,6 @@
 require 'pstore'
 
-module DetectLanguage
+module ThatLanguage
   class Store
     attr_reader :path
 

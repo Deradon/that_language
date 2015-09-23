@@ -1,6 +1,6 @@
 require 'json'
 
-module DetectLanguage
+module ThatLanguage
   class Result
     attr_reader :locale, :value, :hit_count
     attr_accessor :words_count, :total_value

@@ -1,4 +1,4 @@
-module DetectLanguage
+module ThatLanguage
   class LookupContext
     def initialize(lookup_hash)
       @lookup_hash = lookup_hash

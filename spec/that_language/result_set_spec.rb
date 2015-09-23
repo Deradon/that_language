@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe DetectLanguage::ResultSet do
+describe ThatLanguage::ResultSet do
   subject(:result_set) { described_class.new(2) }
 
   describe "#initialize(words_count)" do
@@ -11,7 +11,7 @@ describe DetectLanguage::ResultSet do
     subject { result_set.for(locale) }
     let(:locale) { :de }
 
-    it { is_expected.to be_kind_of(DetectLanguage::Result) }
+    it { is_expected.to be_kind_of(ThatLanguage::Result) }
     it "returns the same Result when calling twice" do
       expect(subject).to eq(result_set.for(locale))
     end

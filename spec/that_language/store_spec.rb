@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe DetectLanguage::Store do
+describe ThatLanguage::Store do
   subject(:store) { described_class.new(path) }
 
   let(:path) { File.join('wordlists', 'wordlist-10k.pstore') }

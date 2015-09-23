@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe DetectLanguage::Result do
+describe ThatLanguage::Result do
   subject(:result) { described_class.new(locale: locale) }
 
   let(:locale) { :de }

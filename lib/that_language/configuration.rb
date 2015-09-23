@@ -1,4 +1,4 @@
-module DetectLanguage
+module ThatLanguage
   class Configuration
     attr_reader :wordlist_path
 

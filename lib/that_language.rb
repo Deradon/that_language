@@ -1,13 +1,13 @@
-require "detect_language/version"
+require "that_language/version"
 
-require "detect_language/configuration"
-require "detect_language/detect"
-require "detect_language/lookup_context"
-require "detect_language/result"
-require "detect_language/result_set"
-require "detect_language/store"
+require "that_language/configuration"
+require "that_language/detect"
+require "that_language/lookup_context"
+require "that_language/result"
+require "that_language/result_set"
+require "that_language/store"
 
-module DetectLanguage
+module ThatLanguage
   class << self
     def configuration
       @configuration ||= Configuration.new
@@ -33,7 +33,7 @@ configuration.wordlist_path)
 
     def monkeypatch(klass)
       klass.class_eval do
-        define_method(:language) { DetectLanguage.language(self.to_s) }
+        define_method(:language) { ThatLanguage.language(self.to_s) }
       end
     end
   end
