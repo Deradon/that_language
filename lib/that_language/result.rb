@@ -13,22 +13,6 @@ module ThatLanguage
       @total_value = 0.0
     end
 
-    # TODO: spec
-    def winner!(second_score:)
-      @second_score = second_score
-    end
-
-    # TODO: spec
-    def winner?
-      !@second_score.nil?
-    end
-
-    # TODO: spec
-    def confidence
-      factor = 1 - (@second_score / score)
-      factor * hit_ratio
-    end
-
     def add(value)
       return @value unless value > 0
 
@@ -37,7 +21,7 @@ module ThatLanguage
     end
 
     def score
-      percentage * hit_ratio
+      hit_ratio * percentage
     end
 
     def hit_ratio
@@ -78,6 +62,22 @@ module ThatLanguage
 
     def to_json
       to_h.to_json
+    end
+
+    # TODO: spec
+    def winner!(second_score:)
+      @second_score = second_score
+    end
+
+    # TODO: spec
+    def winner?
+      !@second_score.nil?
+    end
+
+    # TODO: spec
+    def confidence
+      factor = 1 - (@second_score / score)
+      factor * hit_ratio
     end
   end
 end
