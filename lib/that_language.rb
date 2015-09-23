@@ -18,8 +18,8 @@ module ThatLanguage
       detect.details(text)
     end
 
-    def language(text)
-      detect.language(text)
+    def locale(text)
+      detect.locale(text)
     end
 
     def detect
@@ -28,12 +28,13 @@ module ThatLanguage
 
     def lookup_context
       @lookup_context ||= LookupContext.from_wordlist_path(
-configuration.wordlist_path)
+        configuration.wordlist_path
+      )
     end
 
     def monkeypatch(klass)
       klass.class_eval do
-        define_method(:language) { ThatLanguage.language(self.to_s) }
+        define_method(:locale) { ThatLanguage.locale(self.to_s) }
       end
     end
   end

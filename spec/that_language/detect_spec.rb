@@ -33,8 +33,8 @@ describe ThatLanguage::Detect do
     it { is_expected.to be_kind_of(ThatLanguage::ResultSet) }
   end
 
-  describe "#language(text)" do
-    subject { detect.language(text) }
+  describe "#locale(text)" do
+    subject { detect.locale(text) }
     let(:text) { "der the of" }
 
     it { is_expected.to be_kind_of(ThatLanguage::Result) }

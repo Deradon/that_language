@@ -9,6 +9,10 @@ module ThatLanguage
       @lookup_context = lookup_context
     end
 
+    def locale(text)
+      details(text).winner
+    end
+
     def details(text)
       words = words_for(text)
 
@@ -20,10 +24,6 @@ module ThatLanguage
       end
 
       result_set
-    end
-
-    def language(text)
-      details(text).winner
     end
 
   private
