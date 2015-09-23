@@ -14,12 +14,22 @@ module ThatLanguage
     end
     alias_method :config, :configuration
 
+    def locale(text)
+      detect.locale(text)
+    end
+
     def details(text)
       detect.details(text)
     end
 
-    def locale(text)
-      detect.locale(text)
+    def available_locales
+      @available_locales ||= lookup_context.locales
+    end
+
+    def monkeypatch(klass)
+      klass.class_eval do
+        define_method(:locale) { ThatLanguage.locale(self.to_s) }
+      end
     end
 
     def detect
@@ -30,12 +40,6 @@ module ThatLanguage
       @lookup_context ||= LookupContext.from_wordlist_path(
         configuration.wordlist_path
       )
-    end
-
-    def monkeypatch(klass)
-      klass.class_eval do
-        define_method(:locale) { ThatLanguage.locale(self.to_s) }
-      end
     end
   end
 end

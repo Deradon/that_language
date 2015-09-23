@@ -36,25 +36,13 @@ describe ThatLanguage do
     end
   end
 
-  describe ".lookup_context" do
-    subject { described_class.lookup_context }
+  describe ".locale(text)" do
+    subject { described_class.locale(text) }
+    let(:text) { "der the of" }
 
-    it { is_expected.to be_kind_of(ThatLanguage::LookupContext) }
-    it "memoizes the LookupContext" do
-      expect(subject).to eq(described_class.lookup_context)
-    end
-
-    it "create a LookupContext with with locales set" do
-      expect(subject.locales).to eq(%w(it en fr de nl))
-    end
-  end
-
-  describe ".detect" do
-    subject { described_class.detect }
-
-    it { is_expected.to be_kind_of(ThatLanguage::Detect) }
-    it "memoizes the Detect" do
-      expect(subject).to eq(described_class.detect)
+    it { is_expected.to be_kind_of(ThatLanguage::Result) }
+    it "returns a Result with a locale" do
+      expect(subject.locale).to eq("en")
     end
   end
 
@@ -65,14 +53,14 @@ describe ThatLanguage do
     it { is_expected.to be_kind_of(ThatLanguage::ResultSet) }
   end
 
-  describe ".locale(text)" do
-    subject { described_class.locale(text) }
-    let(:text) { "der the of" }
+  describe ".available_locales" do
+    subject { described_class.available_locales }
 
-    it { is_expected.to be_kind_of(ThatLanguage::Result) }
-    it "returns a Result with a locale" do
-      expect(subject.locale).to eq("en")
-    end
+    it { is_expected.to include("de") }
+    it { is_expected.to include("en") }
+    it { is_expected.to include("fr") }
+    it { is_expected.to include("it") }
+    it { is_expected.to include("nl") }
   end
 
   describe ".monkeypatch(klass)" do
@@ -90,6 +78,28 @@ describe ThatLanguage do
       it "returns a Result with a locale" do
         expect(subject.locale.locale).to eq("en")
       end
+    end
+  end
+
+  describe ".detect" do
+    subject { described_class.detect }
+
+    it { is_expected.to be_kind_of(ThatLanguage::Detect) }
+    it "memoizes the Detect" do
+      expect(subject).to eq(described_class.detect)
+    end
+  end
+
+  describe ".lookup_context" do
+    subject { described_class.lookup_context }
+
+    it { is_expected.to be_kind_of(ThatLanguage::LookupContext) }
+    it "memoizes the LookupContext" do
+      expect(subject).to eq(described_class.lookup_context)
+    end
+
+    it "create a LookupContext with with locales set" do
+      expect(subject.locales).to eq(%w(it en fr de nl))
     end
   end
 end
