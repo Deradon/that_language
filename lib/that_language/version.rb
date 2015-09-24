@@ -1,3 +1,3 @@
 module ThatLanguage
-  VERSION = "0.1.0.pre"
+  VERSION = "0.1.0.pre1"
 end
