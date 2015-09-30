@@ -42,6 +42,20 @@ module ThatLanguage
       @language_codes ||= lookup_hash[:language_codes]
     end
 
+    # TODO: This code is ugly. Refactor me :(
+    def normalized(word)
+      h = self[word]
+      max = h.values.max
+
+      return h if max == 0.0
+
+      h.each do |word, value|
+        h[word] = value / max
+      end
+
+      h
+    end
+
     # TODO: We could add memoization, but this will increase memory usage a lot
     def [](word)
       h = {}

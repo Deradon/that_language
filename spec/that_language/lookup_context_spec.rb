@@ -6,8 +6,8 @@ describe ThatLanguage::LookupContext do
   let(:lookup_hash) do
     Hash.new.tap do |hash|
       hash[:language_codes] = %w(de en)
-      hash["de"] = { "der" => 0.04, "die" => 0.03 }
-      hash["en"] = { "the" => 0.05, "of" => 0.02 }
+      hash["de"] = { "der" => 0.04, "die" => 0.03, "foo" => 0.01 }
+      hash["en"] = { "the" => 0.05, "of" => 0.02, "foo" => 0.02 }
     end
   end
 
@@ -49,6 +49,25 @@ describe ThatLanguage::LookupContext do
     end
   end
 
+  describe "#normalized(word)" do
+    subject { lookup_context.normalized(word) }
+
+    context "with 'der'" do
+      let(:word) { 'der' }
+      it { is_expected.to eq({"de" => 1.0, "en" => 0.0}) }
+    end
+
+    context "with 'of'" do
+      let(:word) { 'of' }
+      it { is_expected.to eq({"de" => 0.0, "en" => 1.0}) }
+    end
+
+    context "with 'foo'" do
+      let(:word) { 'foo' }
+      it { is_expected.to eq({"de" => 0.5, "en" => 1.0}) }
+    end
+  end
+
   describe "[](word)" do
     subject { lookup_context[word] }
 
@@ -76,6 +95,6 @@ describe ThatLanguage::LookupContext do
     its(:language_codes) { is_expected.to eq(%w(de en it)) }
     specify { expect(subject["der"]).to eq({"de" => 0.04, "en" => 0.0, "it" => 0.0}) }
     specify { expect(subject["of"]).to eq({"de" => 0.0, "en" => 0.02, "it" => 0.0}) }
-    specify { expect(subject["foo"]).to eq({"de" => 0.0, "en" => 0.0, "it" => 0.05}) }
+    specify { expect(subject["foo"]).to eq({"de" => 0.01, "en" => 0.02, "it" => 0.05}) }
   end
 end
