@@ -9,7 +9,11 @@ module ThatLanguage
       @lookup_context = lookup_context
     end
 
-    def locale(text)
+    def language_code(text)
+      detect(text).language_code
+    end
+
+    def detect(text)
       details(text).winner
     end
 
@@ -20,7 +24,7 @@ module ThatLanguage
 
       words.each do |word|
         word_result = lookup_context[word]
-        word_result.each { |locale, value| result_set.for(locale).add(value) }
+        word_result.each { |language_code, value| result_set.for(language_code).add(value) }
       end
 
       result_set

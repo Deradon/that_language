@@ -30,8 +30,8 @@ describe ThatLanguage::Store do
 
     it { is_expected.to be_kind_of(Hash) }
 
-    it "contains :locales" do
-      expect(subject[:locales]).not_to be_nil
+    it "contains :language_codes" do
+      expect(subject[:language_codes]).not_to be_nil
     end
 
     it "contains 'de'" do

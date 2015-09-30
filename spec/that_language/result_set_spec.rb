@@ -7,13 +7,13 @@ describe ThatLanguage::ResultSet do
     pending
   end
 
-  describe "#for(locale)" do
-    subject { result_set.for(locale) }
-    let(:locale) { :de }
+  describe "#for(language_code)" do
+    subject { result_set.for(language_code) }
+    let(:language_code) { :de }
 
     it { is_expected.to be_kind_of(ThatLanguage::Result) }
     it "returns the same Result when calling twice" do
-      expect(subject).to eq(result_set.for(locale))
+      expect(subject).to eq(result_set.for(language_code))
     end
   end
 

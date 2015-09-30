@@ -1,19 +1,19 @@
 require 'spec_helper'
 
 describe ThatLanguage::Result do
-  subject(:result) { described_class.new(locale: locale) }
+  subject(:result) { described_class.new(language_code: language_code) }
 
-  let(:locale) { :de }
+  let(:language_code) { :de }
 
   describe ".initialize" do
-    context "without locale" do
+    context "without language_code" do
       it "raises an ArgumentError" do
         expect { described_class.new }.to raise_error(ArgumentError)
       end
     end
   end
 
-  its(:locale) { is_expected.to eq(:de) }
+  its(:language_code) { is_expected.to eq(:de) }
   its(:value) { is_expected.to eq(0) }
   its(:hit_count) { is_expected.to eq(0) }
   its(:words_count) { is_expected.to eq(0) }
@@ -102,9 +102,9 @@ describe ThatLanguage::Result do
   end
 
   describe "<=>" do
-    let(:first_result) { described_class.new(locale: :de) }
-    let(:second_result) { described_class.new(locale: :en) }
-    let(:third_result) { described_class.new(locale: :fr) }
+    let(:first_result) { described_class.new(language_code: :de) }
+    let(:second_result) { described_class.new(language_code: :en) }
+    let(:third_result) { described_class.new(language_code: :fr) }
 
     before do
       first_result.add(0.2)
@@ -133,7 +133,7 @@ describe ThatLanguage::Result do
     subject { result.to_h }
 
     it { is_expected.to be_a(Hash) }
-    it { is_expected.to include(locale: locale) }
+    it { is_expected.to include(language_code: language_code) }
     it { is_expected.to include(value: 0) }
     it { is_expected.to include(score: 0) }
     it { is_expected.to include(percentage: 0) }

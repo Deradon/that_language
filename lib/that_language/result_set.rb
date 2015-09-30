@@ -52,8 +52,8 @@ module ThatLanguage
     end
 
     def lookup
-      @lookup ||= Hash.new do |hash, locale|
-        hash[locale] = Result.new(locale: locale)
+      @lookup ||= Hash.new do |hash, language_code|
+        hash[language_code] = Result.new(language_code: language_code)
       end
     end
   end

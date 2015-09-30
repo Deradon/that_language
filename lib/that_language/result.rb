@@ -2,11 +2,11 @@ require 'json'
 
 module ThatLanguage
   class Result
-    attr_reader :locale, :value, :hit_count
+    attr_reader :language_code, :value, :hit_count
     attr_accessor :words_count, :total_value
 
-    def initialize(locale:)
-      @locale = locale
+    def initialize(language_code:)
+      @language_code = language_code
       @value = 0.0
       @hit_count = 0
       @words_count = 0
@@ -50,7 +50,7 @@ module ThatLanguage
 
     def to_h
       {
-        locale: locale,
+        language_code: language_code,
         value: value,
         score: score,
         percentage: percentage,

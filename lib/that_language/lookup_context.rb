@@ -38,15 +38,15 @@ module ThatLanguage
       end
     end
 
-    def locales
-      @locales ||= lookup_hash[:locales]
+    def language_codes
+      @language_codes ||= lookup_hash[:language_codes]
     end
 
     # TODO: We could add memoization, but this will increase memory usage a lot
     def [](word)
       h = {}
-      locales.each do |locale|
-        h[locale] = lookup_hash[locale][word] || DEFAULT_VALUE
+      language_codes.each do |language_code|
+        h[language_code] = lookup_hash[language_code][word] || DEFAULT_VALUE
       end
       h
     end
@@ -54,11 +54,11 @@ module ThatLanguage
     # NOTE: This code is ugly. Refactor me :(
     def merge(other_lookup_context)
       new_lookup_hash = lookup_hash.dup
-      new_lookup_hash[:locales] |= other_lookup_context.locales
+      new_lookup_hash[:language_codes] |= other_lookup_context.language_codes
 
-      other_lookup_context.locales.each do |locale|
-        new_lookup_hash[locale] ||= {}
-        new_lookup_hash[locale].merge!(other_lookup_context.lookup_hash[locale])
+      other_lookup_context.language_codes.each do |language_code|
+        new_lookup_hash[language_code] ||= {}
+        new_lookup_hash[language_code].merge!(other_lookup_context.lookup_hash[language_code])
       end
 
       LookupContext.new(new_lookup_hash)

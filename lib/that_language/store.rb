@@ -11,9 +11,10 @@ module ThatLanguage
     def to_h
       Hash.new.tap do |hash|
         within_pstore do
-          hash[:locales] = pstore[:locales]
-          hash[:locales].each do |locale|
-            hash[locale] = pstore[locale]
+          # FIXME: Change `pstore[:locales]` to pstore[:language_codes]
+          hash[:language_codes] = pstore[:locales]
+          hash[:language_codes].each do |language_code|
+            hash[language_code] = pstore[language_code]
           end
         end
       end

@@ -36,14 +36,11 @@ describe ThatLanguage do
     end
   end
 
-  describe ".locale(text)" do
-    subject { described_class.locale(text) }
+  describe ".language_code(text)" do
+    subject { described_class.language_code(text) }
     let(:text) { "der the of" }
 
-    it { is_expected.to be_kind_of(ThatLanguage::Result) }
-    it "returns a Result with a locale" do
-      expect(subject.locale).to eq("en")
-    end
+    it { is_expected.to eq("en") }
   end
 
   describe ".details(text)" do
@@ -53,8 +50,8 @@ describe ThatLanguage do
     it { is_expected.to be_kind_of(ThatLanguage::ResultSet) }
   end
 
-  describe ".available_locales" do
-    subject { described_class.available_locales }
+  describe ".available_language_codes" do
+    subject { described_class.available_language_codes }
 
     it { is_expected.to include("de") }
     it { is_expected.to include("en") }
@@ -64,20 +61,12 @@ describe ThatLanguage do
   end
 
   describe ".monkeypatch(klass)" do
+    subject { klass.new(text) }
     let(:klass) { Class.new(String) }
     let(:text) { "der the of" }
 
     before { described_class.monkeypatch(klass) }
 
-    specify "monkeypatched class responds to :locale" do
-      expect(klass.instance_methods).to include(:locale)
-    end
-
-    describe "<MonkeypatchedClass>#locale(text)" do
-      subject { klass.new(text) }
-      it "returns a Result with a locale" do
-        expect(subject.locale.locale).to eq("en")
-      end
-    end
+    its(:language_code) { is_expected.to eq("en") }
   end
 end

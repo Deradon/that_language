@@ -5,13 +5,13 @@ describe ThatLanguage::LookupContext do
 
   let(:lookup_hash) do
     Hash.new.tap do |hash|
-      hash[:locales] = %w(de en)
+      hash[:language_codes] = %w(de en)
       hash["de"] = { "der" => 0.04, "die" => 0.03 }
       hash["en"] = { "the" => 0.05, "of" => 0.02 }
     end
   end
 
-  its(:locales) { is_expected.to eq(%w(de en)) }
+  its(:language_codes) { is_expected.to eq(%w(de en)) }
 
   describe "#initialize" do
     context "without arguments" do
@@ -36,7 +36,7 @@ describe ThatLanguage::LookupContext do
       end
 
       it { is_expected.to be_kind_of(ThatLanguage::LookupContext) }
-      its(:locales) { is_expected.to eq(%w(it en fr de nl)) }
+      its(:language_codes) { is_expected.to eq(%w(it en fr de nl)) }
     end
 
     context "when given path is a existing directory" do
@@ -45,7 +45,7 @@ describe ThatLanguage::LookupContext do
       end
 
       it { is_expected.to be_kind_of(ThatLanguage::LookupContext) }
-      its(:locales) { is_expected.to eq(%w(it en fr de nl)) }
+      its(:language_codes) { is_expected.to eq(%w(it en fr de nl)) }
     end
   end
 
@@ -68,12 +68,12 @@ describe ThatLanguage::LookupContext do
     let(:other_lookup_context) { described_class.new(other_lookup_hash) }
     let(:other_lookup_hash) do
       Hash.new.tap do |hash|
-        hash[:locales] = %w(it)
+        hash[:language_codes] = %w(it)
         hash["it"] = { "foo" => 0.05, "bar" => 0.02 }
       end
     end
 
-    its(:locales) { is_expected.to eq(%w(de en it)) }
+    its(:language_codes) { is_expected.to eq(%w(de en it)) }
     specify { expect(subject["der"]).to eq({"de" => 0.04, "en" => 0.0, "it" => 0.0}) }
     specify { expect(subject["of"]).to eq({"de" => 0.0, "en" => 0.02, "it" => 0.0}) }
     specify { expect(subject["foo"]).to eq({"de" => 0.0, "en" => 0.0, "it" => 0.05}) }
