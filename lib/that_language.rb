@@ -15,11 +15,15 @@ module ThatLanguage
     alias_method :config, :configuration
 
     def language_code(text)
-      detect.language_code(text)
+      detect_context.language_code(text)
+    end
+
+    def detect(text)
+      detect_context.detect(text)
     end
 
     def details(text)
-      detect.details(text)
+      detect_context.details(text)
     end
 
     def available_language_codes
@@ -34,8 +38,8 @@ module ThatLanguage
 
   private
 
-    def detect
-      @detect ||= Detect.new(lookup_context)
+    def detect_context
+      @detect_context ||= Detect.new(lookup_context)
     end
 
     def lookup_context

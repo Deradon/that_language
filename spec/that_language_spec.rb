@@ -9,6 +9,7 @@ describe ThatLanguage do
       'wordlist-10.pstore'
     )
   end
+  let(:text) { "der the of" }
 
   before do
     allow(ThatLanguage.configuration).to receive(:wordlist_path)
@@ -38,15 +39,16 @@ describe ThatLanguage do
 
   describe ".language_code(text)" do
     subject { described_class.language_code(text) }
-    let(:text) { "der the of" }
-
     it { is_expected.to eq("en") }
+  end
+
+  describe ".detect(text)" do
+    subject { described_class.detect(text) }
+    it { is_expected.to be_kind_of(ThatLanguage::Result) }
   end
 
   describe ".details(text)" do
     subject { described_class.details(text) }
-    let(:text) { "der the of" }
-
     it { is_expected.to be_kind_of(ThatLanguage::ResultSet) }
   end
 
@@ -63,7 +65,6 @@ describe ThatLanguage do
   describe ".monkeypatch(klass)" do
     subject { klass.new(text) }
     let(:klass) { Class.new(String) }
-    let(:text) { "der the of" }
 
     before { described_class.monkeypatch(klass) }
 
