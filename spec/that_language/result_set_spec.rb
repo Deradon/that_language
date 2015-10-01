@@ -48,7 +48,6 @@ describe ThatLanguage::ResultSet do
 
     its(:confidence) { is_expected.to be > 0.1 }
     its(:confidence) { is_expected.to be < 0.2 }
-    its(:winner?) { is_expected.to eq(true) }
 
     it "returns result with highest value" do
       expect(subject).to eq(second_result)

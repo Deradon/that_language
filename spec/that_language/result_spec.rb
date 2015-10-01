@@ -17,7 +17,6 @@ describe ThatLanguage::Result do
   its(:value) { is_expected.to eq(0) }
   its(:hit_count) { is_expected.to eq(0) }
   its(:words_count) { is_expected.to eq(0) }
-  its(:hit_count) { is_expected.to eq(0) }
 
   describe "#add(value)" do
     before { subject.add(value_to_add) }
@@ -42,11 +41,6 @@ describe ThatLanguage::Result do
     its(:words_count) { is_expected.to eq(42) }
   end
 
-  describe "#total_value=" do
-    before { subject.total_value = 0.7 }
-    its(:total_value) { is_expected.to eq(0.7) }
-  end
-
   describe "#hit_ratio" do
     subject { result.hit_ratio }
 
@@ -63,41 +57,20 @@ describe ThatLanguage::Result do
     end
   end
 
-  describe "#percentage" do
-    subject { result.percentage }
+  describe "#confidence" do
+    subject { result.confidence }
 
-    before do
-      result.add(0.5)
-      result.total_value = 0.7
-    end
-
-    it { is_expected.to eq(0.5/0.7) }
-
-    context "when total_value is 0" do
-      before { result.total_value = 0 }
-      it { is_expected.to eq(0) }
-    end
-  end
-
-  describe "#score" do
-    subject { result.score }
-
-    before do
-      result.add(0.2)
-      result.words_count = 2
-      result.total_value = 0.4
-    end
-
-    it { is_expected.to eq(0.2/0.4 * 1/2) }
-
-    context "when total_value is 0" do
-      before { result.total_value = 0 }
+    context "when no value was added" do
       it { is_expected.to eq(0) }
     end
 
-    context "when words_count is 0" do
-      before { result.words_count = 0 }
-      it { is_expected.to eq(0) }
+    context "with value added" do
+      before do
+        result.add(0.5)
+        result.words_count = 2
+      end
+
+      it { is_expected.to eq(0.25) }
     end
   end
 
@@ -110,11 +83,6 @@ describe ThatLanguage::Result do
       first_result.add(0.2)
       second_result.add(0.4)
       third_result.add(0.1)
-
-      [first_result, second_result, third_result].each do |result|
-        result.total_value = 0.7
-        result.words_count = 10
-      end
     end
 
     specify { expect(first_result).to be > third_result }
@@ -134,9 +102,8 @@ describe ThatLanguage::Result do
 
     it { is_expected.to be_a(Hash) }
     it { is_expected.to include(language_code: language_code) }
+    it { is_expected.to include(confidence: 0) }
     it { is_expected.to include(value: 0) }
-    it { is_expected.to include(score: 0) }
-    it { is_expected.to include(percentage: 0) }
     it { is_expected.to include(hit_ratio: 0) }
     it { is_expected.to include(hit_count: 0) }
     it { is_expected.to include(words_count: 0) }

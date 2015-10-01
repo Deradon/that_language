@@ -11,7 +11,7 @@ module ThatLanguage
     end
 
     def winner
-      results.max.tap { |r| r.winner!(second_score: results[1].score) }
+      results.max
     end
 
     def results
@@ -43,12 +43,7 @@ module ThatLanguage
     def finalize_results
       _results.each do |result|
         result.words_count = @words_count
-        result.total_value = total_value
       end
-    end
-
-    def total_value
-      _results.inject(0) { |sum, result| sum += result.value }
     end
 
     def lookup

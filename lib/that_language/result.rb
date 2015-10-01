@@ -3,14 +3,13 @@ require 'json'
 module ThatLanguage
   class Result
     attr_reader :language_code, :value, :hit_count
-    attr_accessor :words_count, :total_value
+    attr_accessor :words_count
 
     def initialize(language_code:)
       @language_code = language_code
       @value = 0.0
       @hit_count = 0
       @words_count = 0
-      @total_value = 0.0
     end
 
     def add(value)
@@ -20,8 +19,10 @@ module ThatLanguage
       @value += value
     end
 
-    def score
-      hit_ratio * percentage
+    def confidence
+      return 0 unless words_count > 0
+
+      value / words_count
     end
 
     def hit_ratio
@@ -30,30 +31,23 @@ module ThatLanguage
       @hit_count.to_f / @words_count
     end
 
-    def percentage
-      return 0.0 if @total_value == 0
-
-      @value / @total_value
-    end
-
     def <=>(other)
-      score <=> other.score
+      value <=> other.value
     end
 
     def <(other)
-      score < other.score
+      value < other.value
     end
 
     def >(other)
-      score > other.score
+      value > other.value
     end
 
     def to_h
       {
         language_code: language_code,
+        confidence: confidence,
         value: value,
-        score: score,
-        percentage: percentage,
         hit_ratio: hit_ratio,
         hit_count: hit_count,
         words_count: words_count
@@ -62,22 +56,6 @@ module ThatLanguage
 
     def to_json
       to_h.to_json
-    end
-
-    # TODO: spec
-    def winner!(second_score:)
-      @second_score = second_score
-    end
-
-    # TODO: spec
-    def winner?
-      !@second_score.nil?
-    end
-
-    # TODO: spec
-    def confidence
-      factor = 1 - (@second_score / score)
-      factor * hit_ratio
     end
   end
 end

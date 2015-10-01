@@ -45,11 +45,8 @@ describe ThatLanguage::Detect do
 
     its(:language_code) { is_expected.to eq("en") }
 
-    its(:score) { is_expected.to be > 0.4 }
-    its(:score) { is_expected.not_to be > 0.5 }
-
-    its(:percentage) { is_expected.to be > 0.6 }
-    its(:percentage) { is_expected.not_to be > 0.7 }
+    its(:confidence) { is_expected.to be > 0.6 }
+    its(:confidence) { is_expected.not_to be > 0.7 }
 
     its(:hit_ratio) { is_expected.to be > 0.6 }
     its(:hit_ratio) { is_expected.not_to be > 0.7 }
