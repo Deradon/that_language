@@ -27,10 +27,9 @@ describe ThatLanguage::Detect do
     end
   end
 
-  describe "#details(text)" do
-    subject { detect.details(text) }
-
-    it { is_expected.to be_kind_of(ThatLanguage::ResultSet) }
+  describe "#language(text)" do
+    subject { detect.language(text) }
+    it { is_expected.to eq(:"English") }
   end
 
   describe "#language_code(text)" do
@@ -52,6 +51,12 @@ describe ThatLanguage::Detect do
     its(:hit_ratio) { is_expected.not_to be > 0.7 }
 
     its(:hit_count) { is_expected.to eq(2) }
+  end
+
+  describe "#details(text)" do
+    subject { detect.details(text) }
+
+    it { is_expected.to be_kind_of(ThatLanguage::ResultSet) }
   end
 
   describe "#to_h" do

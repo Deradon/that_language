@@ -3,7 +3,9 @@ require 'support/available_languages_helper'
 
 describe ThatLanguage, "it (italian)" do
   include AvailableLanguagesHelper
+
   use_language_code "it"
+  use_language :"Italian"
 
   # WhatLanguageTest
   assert_that_language_with <<-TEXT

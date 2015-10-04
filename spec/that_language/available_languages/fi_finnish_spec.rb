@@ -3,7 +3,9 @@ require 'support/available_languages_helper'
 
 describe ThatLanguage, "fi (finnish)" do
   include AvailableLanguagesHelper
+
   use_language_code "fi"
+  use_language :"Finnish"
 
   # WhatLanguageTest
   assert_that_language_with "Mitä kieltä tämä on?"

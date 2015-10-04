@@ -37,6 +37,11 @@ describe ThatLanguage do
     end
   end
 
+  describe ".language(text)" do
+    subject { described_class.language(text) }
+    it { is_expected.to eq(:"English") }
+  end
+
   describe ".language_code(text)" do
     subject { described_class.language_code(text) }
     it { is_expected.to eq("en") }

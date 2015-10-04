@@ -101,7 +101,8 @@ describe ThatLanguage::Result do
     subject { result.to_h }
 
     it { is_expected.to be_a(Hash) }
-    it { is_expected.to include(language_code: language_code) }
+    it { is_expected.to include(language: :"German") }
+    it { is_expected.to include(language_code: :de) }
     it { is_expected.to include(confidence: 0) }
     it { is_expected.to include(value: 0) }
     it { is_expected.to include(hit_ratio: 0) }

@@ -4,8 +4,13 @@ module AvailableLanguagesHelper
   end
 
   module ClassMethods
+    def use_language(language)
+      let(:language) { language }
+      # its(:available_languages) { is_expected.to include(language) }
+    end
+
     def use_language_code(language_code)
-      let(:language_code) { language_code}
+      let(:language_code) { language_code }
       its(:available_language_codes) { is_expected.to include(language_code) }
     end
 
@@ -15,6 +20,11 @@ module AvailableLanguagesHelper
       describe ".language_code('#{text}')" do
         subject { that_language.language_code(text) }
         it { is_expected.to eq(language_code) }
+      end
+
+      describe ".language('#{text}')" do
+        subject { that_language.language(text) }
+        it { is_expected.to eq(language) }
       end
     end
   end

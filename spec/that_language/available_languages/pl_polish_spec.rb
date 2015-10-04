@@ -3,7 +3,9 @@ require 'support/available_languages_helper'
 
 describe ThatLanguage, "pl (polish)" do
   include AvailableLanguagesHelper
+
   use_language_code "pl"
+  use_language :"Polish"
 
   # WhatLanguageTest
   assert_that_language_with "W jakim języku to jest?"

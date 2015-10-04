@@ -45,6 +45,7 @@ module ThatLanguage
 
     def to_h
       {
+        language: Iso639[language_code],
         language_code: language_code,
         confidence: confidence,
         value: value,

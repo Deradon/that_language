@@ -2,6 +2,7 @@ require "that_language/version"
 
 require "that_language/configuration"
 require "that_language/detect"
+require "that_language/iso_639"
 require "that_language/lookup_context"
 require "that_language/result"
 require "that_language/result_set"
@@ -13,6 +14,10 @@ module ThatLanguage
       @configuration ||= Configuration.new
     end
     alias_method :config, :configuration
+
+    def language(text)
+      detect_context.language(text)
+    end
 
     def language_code(text)
       detect_context.language_code(text)

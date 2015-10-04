@@ -3,7 +3,9 @@ require 'support/available_languages_helper'
 
 describe ThatLanguage, "zh (chinese)" do
   include AvailableLanguagesHelper
+
   use_language_code "zh"
+  use_language :"Chinese"
 
   pending "zh (chinese) is broken at the moment."
 

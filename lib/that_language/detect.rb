@@ -9,6 +9,10 @@ module ThatLanguage
       @lookup_context = lookup_context
     end
 
+    def language(text)
+      Iso639[detect(text).language_code]
+    end
+
     def language_code(text)
       detect(text).language_code
     end
