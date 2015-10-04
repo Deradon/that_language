@@ -7,6 +7,6 @@ describe ThatLanguage, "no (norwegian)" do
   use_language_code "no"
   use_language :"Norwegian"
 
-  # WhatLanguageTest
-  assert_that_language_with "Hvilket språk er dette?"
+  # Can you help me?
+  assert_that_language_with "Kan du hjelpe meg?"
 end

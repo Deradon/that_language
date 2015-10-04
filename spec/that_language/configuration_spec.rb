@@ -11,7 +11,7 @@ describe ThatLanguage::Configuration do
     describe "#wordlist_path" do
       subject { configuration.wordlist_path }
       let(:wordlist_path) do
-        File.absolute_path(File.join(__FILE__, '../../../wordlists/10000'))
+        File.absolute_path(File.join(__FILE__, '../../../wordlists/10k'))
       end
 
       it { is_expected.to eq(wordlist_path) }

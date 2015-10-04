@@ -3,7 +3,7 @@ require 'spec_helper'
 describe ThatLanguage::Store do
   subject(:store) { described_class.new(path) }
 
-  let(:path) { File.join('wordlists', 'wordlist-10k.pstore') }
+  let(:path) { File.join('spec', 'that_language', 'wordlists', 'wordlist-10.pstore') }
 
   describe "#initialize(path)" do
     context "when no path given" do
@@ -43,7 +43,7 @@ describe ThatLanguage::Store do
     subject { store.exists? }
 
     context "when pstore exists" do
-      let(:path) { File.join('wordlists', 'wordlist-10k.pstore') }
+      let(:path) { File.join('spec', 'that_language', 'wordlists', 'wordlist-10.pstore') }
       it { is_expected.to be(true) }
     end
 
