@@ -28,7 +28,11 @@ module ThatLanguage
 
       words.each do |word|
         word_result = lookup_context.normalized(word)
-        word_result.each { |language_code, value| result_set.for(language_code).add(value) }
+        word_result.each do |language_code, value|
+          next unless value > 0
+
+          result_set.for(language_code).add(value)
+        end
       end
 
       result_set

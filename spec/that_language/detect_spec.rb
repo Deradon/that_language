@@ -6,9 +6,10 @@ describe ThatLanguage::Detect do
   let(:lookup_context) { ThatLanguage::LookupContext.new(lookup_hash) }
   let(:lookup_hash) do
     Hash.new.tap do |hash|
-      hash[:language_codes] = %w(de en)
+      hash[:language_codes] = %w(de en es)
       hash["de"] = { "der" => 0.04, "die" => 0.03 }
       hash["en"] = { "the" => 0.05, "of" => 0.02 }
+      hash["es"] = { "gusta" => 0.05 }
     end
   end
   let(:text) { "der the of" }
@@ -74,9 +75,15 @@ describe ThatLanguage::Detect do
   end
 
   describe "#details(text)" do
-    subject { detect.details(text) }
+    subject(:details) { detect.details(text) }
 
     it { is_expected.to be_kind_of(ThatLanguage::ResultSet) }
+
+    it "does not contain Results with 0 confidence" do
+      details.results.each do |result|
+        expect(result.confidence).to be > 0
+      end
+    end
   end
 
   describe "#to_h" do
