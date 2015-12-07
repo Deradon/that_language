@@ -7,6 +7,6 @@ describe ThatLanguage, "my (burmese)" do
   use_language_code "my"
   use_language :"Burmese"
 
-  # Do you speak Burmese?
-  assert_that_language_with "ဗမာစကား ေြဟတတ်သလား။"
+  # Do you speak English?
+  assert_that_language_with "သင် အင်္ဂလိပ်လို ပြောသလား?"
 end
