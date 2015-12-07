@@ -7,6 +7,6 @@ describe ThatLanguage, "ro (romanian)" do
   use_language_code "ro"
   use_language :"Romanian"
 
-  # Do you speak (English/ Romanian)?
-  assert_that_language_with "Vorbesti (engleza / romana)? / Vorbiti (engleza / romana)?"
+  # Go straight! then turn left!
+  assert_that_language_with "Mergi drept inainte! Apoi o iei la dreapta!"
 end
