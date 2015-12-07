@@ -1,11 +1,13 @@
 module ThatLanguage
   class Configuration
-    attr_reader :wordlist_path
-
-    def initialize
-      @wordlist_path = File.absolute_path(
+    def wordlist_path
+      @wordlist_path ||= File.absolute_path(
         File.join(File.dirname(__FILE__), '../../wordlists/10k/')
       )
+    end
+
+    def wordlist_path=(path)
+      @wordlist_path = path
     end
   end
 end
