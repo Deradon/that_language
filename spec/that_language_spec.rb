@@ -57,6 +57,16 @@ describe ThatLanguage do
     it { is_expected.to be_kind_of(ThatLanguage::ResultSet) }
   end
 
+  describe ".available" do
+    subject { described_class.available }
+
+    it { is_expected.to include(de: :German) }
+    it { is_expected.to include(en: :English) }
+    it { is_expected.to include(fr: :French) }
+    it { is_expected.to include(it: :Italian) }
+    it { is_expected.to include(nl: :Dutch) }
+  end
+
   describe ".available_languages" do
     subject { described_class.available_languages }
 
@@ -70,11 +80,11 @@ describe ThatLanguage do
   describe ".available_language_codes" do
     subject { described_class.available_language_codes }
 
-    it { is_expected.to include("de") }
-    it { is_expected.to include("en") }
-    it { is_expected.to include("fr") }
-    it { is_expected.to include("it") }
-    it { is_expected.to include("nl") }
+    it { is_expected.to include(:de) }
+    it { is_expected.to include(:en) }
+    it { is_expected.to include(:fr) }
+    it { is_expected.to include(:it) }
+    it { is_expected.to include(:nl) }
   end
 
   describe ".monkeypatch(klass)" do

@@ -6,12 +6,12 @@ module AvailableLanguagesHelper
   module ClassMethods
     def use_language(language)
       let(:language) { language }
-      # its(:available_languages) { is_expected.to include(language) }
+      its(:available_languages) { is_expected.to include(language) }
     end
 
     def use_language_code(language_code)
       let(:language_code) { language_code }
-      its(:available_language_codes) { is_expected.to include(language_code) }
+      its(:available_language_codes) { is_expected.to include(language_code.to_sym) }
     end
 
     def assert_that_language_with(text)

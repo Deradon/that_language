@@ -31,14 +31,20 @@ module ThatLanguage
       detect_context.details(text)
     end
 
+    def available
+      @available ||= Hash.new.tap do |available|
+        lookup_context.language_codes.sort.each do |language_code|
+          available[language_code.to_sym] = Iso639[language_code]
+        end
+      end
+    end
+
     def available_languages
-      @available_languages ||= available_language_codes.map do |language_code|
-        Iso639[language_code]
-      end.sort
+      @available_languages ||= available.values.sort
     end
 
     def available_language_codes
-      @available_language_codes ||= lookup_context.language_codes
+      @available_language_codes ||= available.keys.sort.map(&:to_sym)
     end
 
     def monkeypatch(klass)
