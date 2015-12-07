@@ -30,11 +30,21 @@ describe ThatLanguage::Detect do
   describe "#language(text)" do
     subject { detect.language(text) }
     it { is_expected.to eq(:"English") }
+
+    context "with empty string" do
+      let(:text) { "" }
+      it { is_expected.to eq(nil) }
+    end
   end
 
   describe "#language_code(text)" do
     subject { detect.language_code(text) }
     it { is_expected.to eq("en") }
+
+    context "with empty string" do
+      let(:text) { "" }
+      it { is_expected.to eq(nil) }
+    end
   end
 
   describe "#detect(text)" do
@@ -52,6 +62,15 @@ describe ThatLanguage::Detect do
     its(:hit_ratio) { is_expected.not_to be > 0.7 }
 
     its(:hit_count) { is_expected.to eq(2) }
+
+    context "when text is empty string" do
+      let(:text) { "" }
+      it { is_expected.to be_kind_of(ThatLanguage::Result) }
+
+      its(:language) { is_expected.to eq(nil) }
+      its(:language_code) { is_expected.to eq(nil) }
+      its(:confidence) { is_expected.to eq(0) }
+    end
   end
 
   describe "#details(text)" do

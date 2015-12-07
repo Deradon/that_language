@@ -44,7 +44,7 @@ module ThatLanguage
     end
 
     def language
-      Iso639[language_code]
+      Iso639[language_code] if language_code
     end
 
     def to_h

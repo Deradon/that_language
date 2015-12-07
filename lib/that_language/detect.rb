@@ -10,7 +10,7 @@ module ThatLanguage
     end
 
     def language(text)
-      Iso639[detect(text).language_code]
+      detect(text).language
     end
 
     def language_code(text)

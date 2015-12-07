@@ -36,21 +36,32 @@ describe ThatLanguage::ResultSet do
 
   describe "#winner" do
     subject { result_set.winner }
-    let(:first_result) { result_set.for(:de) }
-    let(:second_result) { result_set.for(:en) }
-    let(:third_result) { result_set.for(:fr) }
 
-    before do
-      first_result.add(0.1)
-      second_result.add(0.3)
-      third_result.add(0.2)
+    context "with results" do
+      let(:first_result) { result_set.for(:de) }
+      let(:second_result) { result_set.for(:en) }
+      let(:third_result) { result_set.for(:fr) }
+
+      before do
+        first_result.add(0.1)
+        second_result.add(0.3)
+        third_result.add(0.2)
+      end
+
+      it { is_expected.to be_a(ThatLanguage::Result) }
+      its(:confidence) { is_expected.to be > 0.1 }
+      its(:confidence) { is_expected.to be < 0.2 }
+
+      it "returns result with highest value" do
+        expect(subject).to eq(second_result)
+      end
     end
 
-    its(:confidence) { is_expected.to be > 0.1 }
-    its(:confidence) { is_expected.to be < 0.2 }
-
-    it "returns result with highest value" do
-      expect(subject).to eq(second_result)
+    context "without results" do
+      it { is_expected.to be_a(ThatLanguage::Result) }
+      its(:language) { is_expected.to be(nil) }
+      its(:language_code) { is_expected.to be(nil) }
+      its(:confidence) { is_expected.to eq(0) }
     end
   end
 

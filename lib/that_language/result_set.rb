@@ -2,6 +2,9 @@ module ThatLanguage
   class ResultSet
     include Enumerable
 
+    # TODO: Handle no result in a better way (NullObject anyone?)
+    NO_RESULT = Result.new(language_code: nil)
+
     def initialize(words_count)
       @words_count = words_count
     end
@@ -11,7 +14,7 @@ module ThatLanguage
     end
 
     def winner
-      results.max
+      results.max || NO_RESULT
     end
 
     def results
