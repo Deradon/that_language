@@ -38,8 +38,8 @@ text = "This is just a random english sentence."
   detect = ThatLanguage.detect(text)
   # => #<ThatLanguage::Result:...
 
-  # detect.language (not yet implemented)
-  # => "English"
+  detect.language
+  # => :English
 
   detect.language_code
   # => "en"

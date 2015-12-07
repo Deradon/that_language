@@ -13,6 +13,7 @@ describe ThatLanguage::Result do
     end
   end
 
+  its(:language) { is_expected.to eq(:German) }
   its(:language_code) { is_expected.to eq(:de) }
   its(:value) { is_expected.to eq(0) }
   its(:hit_count) { is_expected.to eq(0) }

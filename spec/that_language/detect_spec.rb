@@ -42,6 +42,7 @@ describe ThatLanguage::Detect do
 
     it { is_expected.to be_kind_of(ThatLanguage::Result) }
 
+    its(:language) { is_expected.to eq(:English) }
     its(:language_code) { is_expected.to eq("en") }
 
     its(:confidence) { is_expected.to be > 0.6 }

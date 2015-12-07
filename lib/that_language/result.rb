@@ -43,9 +43,13 @@ module ThatLanguage
       value > other.value
     end
 
+    def language
+      Iso639[language_code]
+    end
+
     def to_h
       {
-        language: Iso639[language_code],
+        language: language,
         language_code: language_code,
         confidence: confidence,
         value: value,
