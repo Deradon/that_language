@@ -39,7 +39,7 @@ module ThatLanguage
     end
 
     def language_codes
-      @language_codes ||= lookup_hash[:language_codes]
+      @language_codes ||= lookup_hash[:language_codes].sort
     end
 
     # TODO: This code is ugly. Refactor me :(

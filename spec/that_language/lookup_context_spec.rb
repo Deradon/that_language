@@ -36,7 +36,7 @@ describe ThatLanguage::LookupContext do
       end
 
       it { is_expected.to be_kind_of(ThatLanguage::LookupContext) }
-      its(:language_codes) { is_expected.to eq(%w(it en fr de nl)) }
+      its(:language_codes) { is_expected.to eq(%w(de en fr it nl)) }
     end
 
     context "when given path is a existing directory" do
@@ -45,7 +45,7 @@ describe ThatLanguage::LookupContext do
       end
 
       it { is_expected.to be_kind_of(ThatLanguage::LookupContext) }
-      its(:language_codes) { is_expected.to eq(%w(it en fr de nl)) }
+      its(:language_codes) { is_expected.to eq(%w(de en fr it nl)) }
     end
   end
 

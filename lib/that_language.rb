@@ -31,6 +31,12 @@ module ThatLanguage
       detect_context.details(text)
     end
 
+    def available_languages
+      @available_languages ||= available_language_codes.map do |language_code|
+        Iso639[language_code]
+      end.sort
+    end
+
     def available_language_codes
       @available_language_codes ||= lookup_context.language_codes
     end

@@ -57,6 +57,16 @@ describe ThatLanguage do
     it { is_expected.to be_kind_of(ThatLanguage::ResultSet) }
   end
 
+  describe ".available_languages" do
+    subject { described_class.available_languages }
+
+    it { is_expected.to include(:Dutch) }
+    it { is_expected.to include(:English) }
+    it { is_expected.to include(:French) }
+    it { is_expected.to include(:German) }
+    it { is_expected.to include(:Italian) }
+  end
+
   describe ".available_language_codes" do
     subject { described_class.available_language_codes }
 
