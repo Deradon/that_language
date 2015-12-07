@@ -1,20 +1,7 @@
 require 'spec_helper'
 
 describe ThatLanguage do
-  let(:wordlist_path) do
-    File.join(
-      File.dirname(__FILE__),
-      'that_language',
-      'wordlists',
-      'wordlist-10.pstore'
-    )
-  end
   let(:text) { "der the of" }
-
-  before do
-    allow(ThatLanguage.configuration).to receive(:wordlist_path)
-      .and_return(wordlist_path)
-  end
 
   it 'has a version number' do
     expect(ThatLanguage::VERSION).not_to be nil
@@ -35,6 +22,23 @@ describe ThatLanguage do
     it "delegates to .configuration" do
       expect(described_class.config).to eq(described_class.configuration)
     end
+  end
+
+  describe ".configure" do
+    subject { described_class.config }
+
+    around(:each) do |example|
+      original_wordlist_path = subject.wordlist_path
+
+      described_class.configure do |config|
+        config.wordlist_path = "wordlists/1000k"
+      end
+      example.run
+
+      subject.wordlist_path = original_wordlist_path
+    end
+
+    its(:wordlist_path) { is_expected.to eq("wordlists/1000k") }
   end
 
   describe ".language(text)" do

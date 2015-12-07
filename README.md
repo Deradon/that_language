@@ -35,6 +35,16 @@ Or install it yourself as:
 * ru
 * sv
 
+## Configure
+
+To use a custom directory that contains all the wordlists:
+
+```ruby
+ThatLanguage.configure do |config|
+  config.wordlist_path = File.join("wordlists", "100k")
+end
+```
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake rspec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.

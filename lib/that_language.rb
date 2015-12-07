@@ -15,6 +15,10 @@ module ThatLanguage
     end
     alias_method :config, :configuration
 
+    def configure
+      yield(config)
+    end
+
     def language(text)
       detect_context.language(text)
     end
