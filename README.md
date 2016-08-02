@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/Deradon/that_language.svg?branch=master)](https://travis-ci.org/Deradon/that_language)
+
 # ThatLanguage
 
 ## Installation
