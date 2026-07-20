@@ -1,7 +1,12 @@
 # CLAUDE.md — that_language
 
 The core detection library. Scores text against per-language word-frequency
-lists stored as PStore files. Ruby 3.3.1 (`.tool-versions`).
+lists stored as PStore files. Developed on Ruby 4.0.6 (`.tool-versions`);
+supports 3.1 and up.
+
+`pstore` stopped being a default gem in Ruby 4.0 and is declared as a runtime
+dependency in the gemspec. Do not remove it — without it the library fails to
+load on 4.x with a bare `LoadError`.
 
 ## Commands
 

@@ -28,6 +28,10 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
+  # pstore stopped being a default gem in Ruby 4.0, so it must be declared
+  # explicitly. The wordlists are PStore files; this is a runtime dependency.
+  spec.add_dependency "pstore", "~> 0.2"
+
   spec.add_development_dependency "pry"
   spec.add_development_dependency "rake", "~> 13.0"
   spec.add_development_dependency "rspec", "~> 3.13"
