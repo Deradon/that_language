@@ -21,7 +21,7 @@ module ThatLanguage
     end
 
     def exists?
-      File.exists?(path)
+      File.exist?(path)
     end
 
     private
@@ -30,8 +30,11 @@ module ThatLanguage
       @pstore ||= PStore.new(path) if exists?
     end
 
+    # NOTE: Read-only transaction. Without the `true`, PStore commits on block
+    #       exit and rewrites the wordlist on disk -- merely loading a wordlist
+    #       would leave every .pstore file modified in the working tree.
     def within_pstore(&block)
-      pstore.transaction(&block)
+      pstore.transaction(true, &block)
     end
   end
 end

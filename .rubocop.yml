@@ -1,0 +1,21 @@
+inherit_from: .rubocop_todo.yml
+
+AllCops:
+  TargetRubyVersion: 3.1
+  NewCops: enable
+  SuggestExtensions: false
+  Exclude:
+    - "wordlists/**/*"
+    - "bin/**/*"
+    - "vendor/**/*"
+    - "tmp/**/*"
+
+# The 72 per-language spec files are generated from a shared helper and are
+# intentionally repetitive; block length is not a useful signal there.
+Metrics/BlockLength:
+  Exclude:
+    - "spec/**/*"
+
+# Specs read better without a documentation comment on every describe block.
+Style/Documentation:
+  Enabled: false

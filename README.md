@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/Deradon/that_language.svg?branch=master)](https://travis-ci.org/Deradon/that_language)
+[![CI](https://github.com/Deradon/that_language/actions/workflows/ci.yml/badge.svg)](https://github.com/Deradon/that_language/actions/workflows/ci.yml)
 
 # ThatLanguage
 
@@ -197,7 +197,7 @@ end
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies.
-Then, run `rake rspec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+Then, run `bundle exec rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
 
 To install this gem onto your local machine, run `bundle exec rake install`.
 To release a new version, update the version number in `version.rb`,
