@@ -70,6 +70,4 @@ a change in three repos.
 
 ## Context
 
-Project-level docs live in the umbrella repo one level up (`../../`): see its
-`docs/repos/that_language.md` and `docs/architecture.md`. This is a public GitHub
-repository — do not push without asking.
+This is a public GitHub repository — do not push without asking.
