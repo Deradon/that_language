@@ -1,7 +1,11 @@
 inherit_from: .rubocop_todo.yml
 
 AllCops:
-  TargetRubyVersion: 3.1
+  # TargetRubyVersion is deliberately not set here. RuboCop derives it from
+  # required_ruby_version in the gemspec (currently ">= 3.1"), which takes
+  # precedence over .ruby-version, so the oldest supported Ruby is stated in
+  # exactly one place. It is the *minimum* supported version, not the version
+  # used for development -- raising it means dropping support for users.
   NewCops: enable
   SuggestExtensions: false
   Exclude:
